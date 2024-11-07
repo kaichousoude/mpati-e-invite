@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>E-Invite</title>
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            // Create a FormData object from the form
+            const form = document.querySelector('form');
+            const formData = new FormData(form);
+
+            // Send the form data using fetch
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' // Prevents CORS errors
+            }).then(() => {
+                // Redirect to the thank you page after successful submission
+                window.location.href = "thank-you.html"; // Change to your thank-you page URL
+            }).catch(() => {
+                alert('Failed to send the question. Please try again.');
+            });
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <form onsubmit="submitForm(event)" action="https://docs.google.com/forms/d/e/1FAIpQLSfVP8gltkjy2aMtQTlVL6P8eTSVoaG7cBe64J8sKV5DnkruJg/formResponse" method="POST" enctype="multipart/form-data" target="_self">
+            <div>
+                <!-- Name (required) -->
+                <label for="fullname">Nama Lengkap:</label>
+                <input type="text" name="entry.2046763293" placeholder="Isi nama" id="fullname" required>
+            </div>
+            <div>
+                <!-- Attendance confirmation (required) -->
+                <label for="attendance">Apakah Anda akan hadir di acara MPATI?</label>
+                <select name="entry.1115902228" id="attendance" required>
+                    <option value="">Select an option</option>
+                    <option value="Ya">Ya</option>
+                    <option value="Tidak">Tidak</option>
+                </select>
+            </div>
+            <div>
+                <!-- Question submission (optional) -->
+                <label for="question">Pertanyaan yang ingin ditanyakan:</label>
+                <input type="text" name="entry.1703225554" placeholder="Enter your question">
+            </div>
+              
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
